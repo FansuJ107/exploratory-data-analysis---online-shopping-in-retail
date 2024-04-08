@@ -1,13 +1,12 @@
-import pandas as pd
-from sqlalchemy import create_engine
 import yaml
+from sqlalchemy import create_engine
+import pandas as pd
 
-
-# Load the credentials from the yaml file into a dictionary.
-def load_credentials():
+# Extract the credentials from the yaml file into a dictionary.
+def extract_credentials():
 
     '''
-    This function is used to load the credentials from yaml to a dictionary to establish connection with the RDS.
+    This function is used to extract the credentials from yaml to a dictionary to establish connection with the RDS.
 
     Returns:
         (dict): the credentials in dictionary format.
@@ -17,13 +16,13 @@ def load_credentials():
         return yaml.safe_load(file)
 
 # Store the dictionary into a variable.
-credentials: dict = load_credentials()
+credentials: dict = extract_credentials()
 
 # Creates class object to connect to RDS database and extract data.
 class RDSDatabaseConnector():
 
     '''
-    This class is used to establish a connection with the AiCore RDS containing customer activity information.
+    This class is used to establish a connection with the AiCore RDS containing loan payments information.
 
     Attributes:
         credentials_dict (dict): the dictionary containing the 'Host', 'Password', 'User', 'Database' and 'Port' required for the sqlalchemy to establish a connection with the RDS
@@ -47,9 +46,9 @@ class RDSDatabaseConnector():
         This method is used to create the SQLAlchemy engine which will be required to connect to the AiCore RDS.
         '''
 
-        self.engine = create_engine(f"postgresql+psycopg2://{self.credentials_dict['RDS_HOST']}:{self.credentials_dict['RDS_PASSWORD']}@{self.credentials_dict['RDS_USER']}:{self.credentials_dict['RDS_DATABASE']}/{self.credentials_dict['RDS_PORT']}")
+        self.engine = create_engine(f"postgresql+psycopg2://{self.credentials_dict['RDS_USER']}:{self.credentials_dict['RDS_PASSWORD']}@{self.credentials_dict['RDS_HOST']}:{self.credentials_dict['RDS_PORT']}/{self.credentials_dict['RDS_DATABASE']}")
 
-    # Establishes a connection to the database and creates a pandas dataframe from the 'customer activity' table.
+    # Establishes a connection to the database and creates a pandas dataframe from the 'customer_activity' table.
     def extract_customer_data(self):
 
         '''
@@ -70,10 +69,10 @@ def save_data_to_csv(customer_activity_df: pd.DataFrame):
     This function is used to write the 'customer_activity' dataframe into a csv file using a context manager.
 
     Args:
-        customer_activity_df (pd.DataFrame): The 'customer_activity' dataframe that will be written into a csv file..
+        loans_df (pd.DataFrame): The 'customer_activity' dataframe that will be written into a csv file..
     '''
 
-    with open('customer_activity_versions/customer_activity.csv', 'w') as file:
+    with open('customer_activity.csv', 'w') as file:
         customer_activity_df.to_csv(file, encoding= 'utf-8', index= False)
 
 if __name__ == '__main__':
