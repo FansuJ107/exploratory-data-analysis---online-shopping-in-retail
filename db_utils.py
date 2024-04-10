@@ -75,9 +75,17 @@ def save_data_to_csv(customer_activity_df: pd.DataFrame):
     with open('customer_activity.csv', 'w') as file:
         customer_activity_df.to_csv(file, encoding= 'utf-8', index= False)
 
+def load_data_from_csv(file):
+    return pd.read_csv(file)
+
 if __name__ == '__main__':
     connector = RDSDatabaseConnector(credentials) # Instantiates the 'RDSDatabaseConnector' class using the .
     # Calling all defined methods:
     connector.create_engine() # Creates the sqlalchemy engine to establish connection.
     customer_activity_df: pd.DataFrame = connector.extract_customer_data() # Extracts sql data to a pandas dataframe.
     save_data_to_csv(customer_activity_df) # Writes the dataframe into a csv file.
+    data = load_data_from_csv('customer_activity.csv')
+    print("Data shape:", data.shape)
+    print("Sample of the data:")
+    print(data.head())
+    print(data.columns)
