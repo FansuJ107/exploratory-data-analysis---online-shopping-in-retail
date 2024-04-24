@@ -25,12 +25,31 @@ Since this is confidential, SKIP THIS STEP, This file has already been run and t
 2. The 'imputevalues.py', 'skewedcolumns.py' 'outliers.py' and 'drop_overly_corelated_columns.py' files can be updated to see in more detail the transformations that were done on every column at these steps.
 
 # File structure of project
-credentials.yaml: File to store the database credentials. This file has been added to the .gitignore file in our repository as we don't want our credentials being pushed to GitHub for security reasons.
-customer_activity.csv: The data stored from the credentials.yaml file now in a table.
-dataframeinfo.py:  This is a script used to extract information from the DataFrame and its columns to extract meaningful information
-datatransform.py: This is a script used to transform the columns and put into the correct format.
-db_utils.py: This is a script which extracts the data from a AWS RDS using the credentials.yaml file and ends up creating the customer_activity.csv file
-drop_overly_corelated_columns.py: This is a script which identifies highly correlated columns and remove them to improve the quality of the data.
-imputevalues.py: This is a script where we identify the variables with missing values and determine the percentage of missing values in each variable. Depending on the extent of missing data, you may choose to either impute the missing values or remove them from the dataset.
-outliers.py: This is a script where we remove outliers from the dataset which improvse the quality and accuracy of the analysis as outliers can distort the analysis results.
-skewedcolumns.py: This is a script where we skew the columns as it can lead to biased models and inaccurate results, so it's important to address this issue before proceeding with any analysis.
+- credentials.yaml: File to store the database credentials. This file has been added to the .gitignore file in our repository as we don't want our credentials being pushed to GitHub for security reasons.
+
+- customer_activity.csv: The data stored from the credentials.yaml file now in a table.
+
+- dataframeinfo.py:  This is a script used to extract information from the DataFrame and its columns to extract meaningful information.
+
+- datatransform.py: This is a script used to transform the columns and put into the correct format.
+
+- db_utils.py: This is a script which extracts the data from a AWS RDS using the credentials.yaml file and ends up creating the customer_activity.csv file
+
+- drop_overly_corelated_columns.py: This is a script which identifies highly correlated columns and remove them to improve the quality of the data.
+
+- imputevalues.py: This is a script where we identify the variables with missing values and determine the percentage of missing values in each variable. Depending on the extent of missing data, you may choose to either impute the missing values or remove them from the dataset.
+
+- outliers.py: This is a script where we remove outliers from the dataset which improvse the quality and accuracy of the analysis as outliers can distort the analysis results.
+
+- skewedcolumns.py: This is a script where we skew the columns as it can lead to biased models and inaccurate results, so it's important to address this issue before proceeding with any analysis.
+
+- customers_doing.py: This is a script where we get a visual representation of the performance of the website
+
+- customer_software.py: This is a script where we get a visual representation of what systems our users are using to visit the website.
+
+- effective_marketing.py: This is a script where we get a visual representation of the traffic coming to the website to see if the marketing team can make any improvements to their existing strategy. 
+
+- revenue_generated.py: This is a script where we get a visual representation of where the website revenue is being generated and identifying any problematic areas in the data.
+
+# License
+This is an open source public repository. The dataset was obtained from Aicore. AiCore provided the necessary credentials to download the dataset from AWS RDS (these are not publicly available).
